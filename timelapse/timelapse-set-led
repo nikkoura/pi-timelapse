@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+import argparse
+from pijuice import PiJuice
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('action', choices=['static', 'blink'])
+    parser.add_argument('red', type=int)
+    parser.add_argument('green', type=int)
+    parser.add_argument('blue', type=int)
+
+    args=parser.parse_args()
+    
+    pijuice = PiJuice(1, 0x14)
+
+    
+    if args.action == 'static':
+        pijuice.status.SetLedState('D2', [args.red, args.green, args.blue])
+    elif args.action == 'blink':
+        pijuice.status.SetLedBlink('D2', 255, [args.red, args.green, args.blue], 200, [0,0,0], 1000)
+        
+
+if __name__ == "__main__":
+    main()

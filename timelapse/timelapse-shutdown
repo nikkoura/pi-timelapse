@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set +e
+
+if [ -f "/data/timelapse/control/NO_SHUTDOWN" ] ; then
+	while true; do sleep 10000; done
+fi
+
+while  [ ! -f "/data/timelapse/control/PHOTO_DONE" -a ! -f "/data/timelapse/control/EINK_DONE" ]
+do
+	sleep 5s
+done
+
+rm /data/timelapse/control/PHOTO_DONE
+rm /data/timelapse/control/EINK_DONE
+
+sleep 15s
+
+
+if [ -f "/data/timelapse/control/NO_SHUTDOWN" ] ; then
+	while true; do sleep 10000; done
+fi
+
+timelapse-set-led blink 0 0 0
+
+sudo shutdown now 

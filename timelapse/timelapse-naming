@@ -1,0 +1,52 @@
+#!/usr/bin/python3
+import argparse
+from pathlib import Path
+
+
+def find_last_file(path):
+    photo_path = Path(path)
+    photo_list = sorted([photo_file.name for photo_file in photo_path.glob('IMG_?????.jpg')], reverse=True)
+    
+    if len(photo_list) == 0:
+        return None
+    else:
+        return photo_list[0]
+        
+
+def find_last_num(path):
+    last_photo = find_last_file(path)
+    if last_photo is None:
+        return None
+    else:
+        return int(str(last_photo)[4:-4])
+
+    
+def find_next_num(path):
+    last_num = find_last_num(path)
+    if last_num is None:
+        return 0
+    else:
+        return last_num + 1
+
+def find_next_file(path):
+    next_num = find_next_num(path)
+    return 'IMG_{}.jpg'.format(str(next_num).zfill(5))
+    
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('action', choices=['last_num', 'next_num', 'last_file', 'next_file'])
+    parser.add_argument('--path', default='.')
+    args=parser.parse_args()
+    
+    if args.action == 'last_num':
+        print(find_last_num(args.path))
+    elif args.action == 'last_file':
+        print(find_last_file(args.path))
+    elif args.action == 'next_num':
+        print(find_next_num(args.path))
+    elif args.action == 'next_file':
+        print(find_next_file(args.path))
+        
+
+if __name__ == "__main__":
+    main()

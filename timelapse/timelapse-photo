@@ -1,0 +1,10 @@
+#!/bin/bash
+
+set +e
+
+rm -f /data/timelapse/control/PHOTO_DONE
+
+PHOTO_FILE=$(timelapse-naming next_file --path /data/timelapse)
+raspistill --nopreview --timeout 1 --exposure auto --flicker 50hz --awb auto --output /data/timelapse/$PHOTO_FILE
+
+touch /data/timelapse/control/PHOTO_DONE

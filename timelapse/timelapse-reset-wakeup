@@ -1,0 +1,7 @@
+#!/usr/bin/python3
+import pijuice
+
+pj = pijuice.PiJuice(1, 0x14)
+
+pj.rtcAlarm.SetAlarm({'second': 0, 'minute_period': 10,'hour':'EVERY_HOUR', 'day':'EVERY_DAY'})
+pj.rtcAlarm.SetWakeupEnabled(True)

@@ -1,0 +1,14 @@
+#!/bin/bash
+
+rm -f /data/timelapse/control/EINK_DONE
+
+cd /home/pi/scripts/eink
+
+COUNTER=$(timelapse-naming --path /data/timelapse next_num)
+SD=$( df /data/timelapse | grep -Po '[0-9]+(?=%)')
+SD=$(( 100 - $SD ))
+BATTERY=$(timelapse-get-battery)
+
+./photo-status.py -s $SD -c $COUNTER -b $BATTERY
+
+touch /data/timelapse/control/EINK_DONE
