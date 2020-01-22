@@ -15,7 +15,6 @@ timelapse-reset-wakeup
 timelapse-photo
 timelapse-eink
 
-timelapse-set-led blink 15 0 0
 sleep 15s
 
 timelapse-shutdown

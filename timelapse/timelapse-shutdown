@@ -21,6 +21,9 @@ if [ -f "/data/timelapse/control/NO_SHUTDOWN" ] ; then
 	while true; do sleep 10000; done
 fi
 
+
+timelapse-set-led blink 15 0 0
+sleep 5s
 timelapse-set-led blink 0 0 0
 
 sudo shutdown now 
