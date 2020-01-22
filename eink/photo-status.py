@@ -56,6 +56,10 @@ def draw_screen(battery_percent, sd_free_percent, photo_count):
 
         draw_counter(str(photo_count), epd.height, black_draw, font_large, sd_end + 1, epd.width - 1)
 
+        black_image = black_image.transpose(Image.ROTATE_180)
+        red_image = red_image.transpose(Image.ROTATE_180)
+
+
         logging.info("Updating screen")
 
         epd.display(epd.getbuffer(black_image), epd.getbuffer(red_image))
