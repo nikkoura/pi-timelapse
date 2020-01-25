@@ -3,6 +3,7 @@
 set +e
 
 timelapse-reset-wakeup
+timelapse-log
 
 if [ -f /data/timelapse/control/NO_SHUTDOWN ]
 then
