@@ -9,6 +9,7 @@ then
 	timelapse-shutdown
 else
 	touch /data/timelapse/control/NO_SHUTDOWN
+	sudo systemctl start timelapse-livepreview.service
 	timelapse-set-led blink 15 0 15
 	sleep 5s
 fi
