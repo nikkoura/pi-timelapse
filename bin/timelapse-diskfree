@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set +e 
+
+SD=$( df /data/timelapse | grep -Po '[0-9]+(?=%)')
+SD=$(( 100 - $SD ))
+
+echo $SD

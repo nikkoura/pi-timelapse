@@ -7,5 +7,6 @@ touch /data/timelapse/log.csv
 TIMESTAMP=$(date -Iminutes)
 BATTERY=$(timelapse-get-battery)
 COUNTER=$(timelapse-naming last_num --path /data/timelapse)
+DISK=$(timelapse-diskfree)
 
-echo $COUNTER\;$BATTERY\;$TIMESTAMP >> /data/timelapse/log.csv
+echo $COUNTER\;$BATTERY\;$DISK;$TIMESTAMP >> /data/timelapse/log.csv
