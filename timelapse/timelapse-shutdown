@@ -2,28 +2,14 @@
 
 set +e
 
-if [ -f "/data/timelapse/control/NO_SHUTDOWN" ] ; then
-	while true; do sleep 10000; done
-fi
-
-while  [ ! -f "/data/timelapse/control/PHOTO_DONE" -a ! -f "/data/timelapse/control/EINK_DONE" ]
+while [ -f "/data/timelapse/control/NO_SHUTDOWN" ]
 do
 	sleep 5s
 done
 
-rm /data/timelapse/control/PHOTO_DONE
-rm /data/timelapse/control/EINK_DONE
+timelapse-reset-wakeup
+sudo systemctl enable timelapse.service
 
-sleep 15s
-
-
-if [ -f "/data/timelapse/control/NO_SHUTDOWN" ] ; then
-	while true; do sleep 10000; done
-fi
-
-
-timelapse-set-led blink 15 0 0
-sleep 5s
 timelapse-set-led blink 0 0 0
 
 sudo shutdown now 

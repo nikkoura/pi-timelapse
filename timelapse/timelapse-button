@@ -3,14 +3,10 @@ set +e
 
 if [ -f "/data/timelapse/control/NO_SHUTDOWN" ]
 then
-	timelapse-set-led blink 15 0 0
-	sleep 10s
+	timelapse-set-led blink 0 0 15
 	rm -f /data/timelapse/control/NO_SHUTDOWN
-	timelapse-reset-wakeup
-	sudo systemctl enable timelapse.service
-	timelapse-set-led blink 0 0 0
 	sleep 5s
-	sudo reboot
+	timelapse-shutdown
 else
 	touch /data/timelapse/control/NO_SHUTDOWN
 	timelapse-set-led blink 15 0 15

@@ -2,19 +2,21 @@
 
 set +e
 
+timelapse-reset-wakeup
+
 if [ -f /data/timelapse/control/NO_SHUTDOWN ]
 then
 	timelapse-set-led blink 15 0 15
-	while true ; sleep 10000 ; done
 else
 	timelapse-set-led blink 0 15 0
-	sleep 5s
 fi
 
-timelapse-reset-wakeup
-timelapse-photo
-timelapse-eink
-
 sleep 15s
+if [ ! -f /data/timelapse/control/NO_SHUTDOWN ]
+then
+	timelapse-set-led blink 0 0 15
+	timelapse-photo
+	timelapse-eink
+fi
 
 timelapse-shutdown
