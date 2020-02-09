@@ -9,6 +9,11 @@ if [ -f /data/timelapse/control/NO_SHUTDOWN ]
 then
 	sudo systemctl start timelapse-livepreview.service
 	timelapse-set-led blink 15 0 15
+	while [ -f /data/timelapse/control/NO_SHUTDOWN ]
+	do
+		timelapse-eink
+		sleep 300s
+	done
 else
 	timelapse-set-led blink 0 15 0
 fi
