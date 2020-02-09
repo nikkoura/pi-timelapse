@@ -2,11 +2,11 @@
 
 set +e 
 
-touch /data/timelapse/log.csv
+sudo touch /data/timelapse/log.csv
 
 TIMESTAMP=$(date -Iminutes)
 BATTERY=$(timelapse-get-battery)
 COUNTER=$(timelapse-naming last_num --path /data/timelapse)
 DISK=$(timelapse-diskfree)
 
-echo $COUNTER\;$BATTERY\;$DISK;$TIMESTAMP >> /data/timelapse/log.csv
+sudo echo $COUNTER\;$BATTERY\;$DISK\;$TIMESTAMP >> /data/timelapse/log.csv
